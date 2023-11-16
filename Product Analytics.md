@@ -1,3 +1,6 @@
+## Data scheme	
+![image](https://github.com/chiangsuanne/SQL-Portfolio/assets/108243961/41fa9399-4efa-46f3-a9b1-104498f7b592)
+
 ### Calculating descriptive statistics for monthly revenue by product
 **Business problem:**	  
 The leadership team at your company is making goals for 2023 and wants to understand how much revenue each product subscriptions, basic and expert, are generating each month. More specifically, they want to understand the distribution of monthly revenue across the past year, 2022.	
@@ -6,9 +9,7 @@ They've asked the following questions:
 2. Which product had the most success throughout all of last year?
 3. Did either product fluctuate greatly each month or was the month-to-month trend fairly consistent?
 
-**Data scheme**	
-![image](https://github.com/chiangsuanne/SQL-Portfolio/assets/108243961/41fa9399-4efa-46f3-a9b1-104498f7b592)
-
+**Query**
 ```sql
 WITH product_rev as (
 SELECT 
@@ -36,5 +37,5 @@ GROUP BY ProductName;
 | Basic       | 500     | 28000   | 13188   | 8123.763642197237  |
 | Expert      | 3000    | 46000   | 18000   | 13796.134724383252 |
 
-The Expert monthly revenues had more variability, whereas the Basic monthly revenues were more centered on the mean.	
+The Expert monthly revenues had more variability, whereas the Basic monthly revenues were more centered on the mean.    	
 Although the Expert product produced more revenue on average, the Basic product was a little more consistent.
