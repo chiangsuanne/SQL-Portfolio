@@ -40,7 +40,7 @@ GROUP BY ProductName;
 
 The Expert monthly revenues had more variability, whereas the Basic monthly revenues were more centered on the mean.    Although the Expert product produced more revenue on average, the Basic product was a little more consistent.
 
-### Exploring variable distributions with CTEs
+### Exploring Email Campaign variable distributions
 **Business problem:**    
 A marketing manager wants to understand the performance of their recent email campaign. After the campaign launch, the marketing manager wants to know how many users have clicked the link in the email.   
 
@@ -70,3 +70,61 @@ GROUP BY num_link_clicks;
 | 1               | 3         |
 | 2               | 2         |
 | 3               | 1         |    
+
+### Payment Funnel Analysis
+**Business problem:**    
+The product manager has requested a payment funnel analysis from the analytics team; she wants to understand what the furthest point in the payment process users are getting to and where users are falling out of the process. She wants to have full visibility into each possible stage of the payment process from the user's point of view.    
+
+Here's the payment process a user goes through when signing up for a subscription:    
+1. The user opens the widget to initiate a payment process.
+2. The user types in credit card information.
+3. The user clicks the submit button to complete their part of the payment process.
+4. The product sends the data to the third-party payment processing company.
+5. The payment company completes the transaction and reports back with "complete."    
+
+**Query**
+```sql
+WITH max_status_reached AS (
+	SELECT
+		MAX(StatusID) AS maxstatus,
+		SubscriptionID
+	FROM
+		PaymentStatusLog
+	GROUP BY SubscriptionID
+)
+,
+	paymentfunnelstages AS (
+	SELECT
+		s.SubscriptionID,
+		CASE WHEN maxstatus = 1 then 'PaymentWidgetOpened'
+		when maxstatus = 2 then 'PaymentEntered'
+		when maxstatus = 3 and currentstatus = 0 then 'User Error with Payment Submission'
+		when maxstatus = 3 and currentstatus != 0 then 'Payment Submitted'
+		when maxstatus = 4 and currentstatus = 0 then 'Payment Processing Error with Vendor'
+		when maxstatus = 4 and currentstatus != 0 then 'Payment Success'
+		when maxstatus = 5 then 'Complete'
+		when maxstatus is null then 'User did not start payment process'
+		END AS paymentfunnelstage
+	FROM Subscriptions AS s
+	JOIN max_status_reached AS m
+	WHERE s.SubscriptionID = m.SubscriptionID
+)
+
+SELECT
+	paymentfunnelstage,
+	COUNT(SubscriptionID) AS subscriptions
+FROM paymentfunnelstages
+GROUP BY paymentfunnelstage;
+````
+**Output**
+| PAYMENTFUNNELSTAGE                   | SUBSCRIPTIONS |
+|--------------------------------------|---------------|
+| Complete                             | 12            |
+| Payment Processing Error with Vendor | 1             |
+| Payment Submitted                    | 1             |
+| Payment Success                      | 1             |
+| PaymentEntered                       | 2             |
+| PaymentWidgetOpened                  | 7             |
+| User Error with Payment Submission   | 1             |
+| User did not start payment process   | 3             |
+
