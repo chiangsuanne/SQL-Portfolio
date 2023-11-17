@@ -20,7 +20,8 @@ FROM Products as p
 JOIN Subscriptions as s
 WHERE p.PRODUCTID = s.PRODUCTID
     AND date_trunc('month', OrderDate) BETWEEN '2022-01-01' AND '2022-12-01'
-GROUP BY ProductName, order_month)
+GROUP BY ProductName, order_month
+)
 
 SELECT
     ProductName,
@@ -37,5 +38,35 @@ GROUP BY ProductName;
 | Basic       | 500     | 28000   | 13188   | 8123.763642197237  |
 | Expert      | 3000    | 46000   | 18000   | 13796.134724383252 |
 
-The Expert monthly revenues had more variability, whereas the Basic monthly revenues were more centered on the mean.    	
-Although the Expert product produced more revenue on average, the Basic product was a little more consistent.
+The Expert monthly revenues had more variability, whereas the Basic monthly revenues were more centered on the mean.    Although the Expert product produced more revenue on average, the Basic product was a little more consistent.
+
+### Exploring variable distributions with CTEs
+**Business problem:**    
+A marketing manager wants to understand the performance of their recent email campaign. After the campaign launch, the marketing manager wants to know how many users have clicked the link in the email.   
+
+Tracking events located in the FrontendEventLog table, is logged when the user reaches a unique landing page that is only accessed from this campaign email.    
+Since an overall aggregate metric like an average can hide outliers and further insights under the hood, it's best to calculate distribution of the number of email link clicks per user.    
+
+**Query**
+```sql
+WITH email_link_clicks as (
+    SELECT
+        COUNT(EventID) as num_link_clicks,
+        UserID
+    FROM FrontendEventLog
+    WHERE EventID = 5
+    GROUP BY UserID
+)
+
+SELECT 
+    num_link_clicks,
+    COUNT(UserID) as num_users
+FROM email_link_clicks
+GROUP BY num_link_clicks;
+````
+**Output**    
+| NUM_LINK_CLICKS | NUM_USERS |
+|-----------------|-----------|
+| 1               | 3         |
+| 2               | 2         |
+| 3               | 1         |    
