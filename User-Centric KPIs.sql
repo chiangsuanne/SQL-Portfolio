@@ -1,6 +1,5 @@
-# Analyzing Business Data in SQL
-
--- Registrations by month
+# Registrations by month
+  
 WITH reg_dates AS (
   SELECT
     user_id,
@@ -17,7 +16,8 @@ GROUP BY delivr_month
 ORDER BY delivr_month ASC;  
 
 
--- Monthly active users (MAU)
+# Monthly active users (MAU)
+  
 SELECT
   -- Truncate the order date to the nearest month
   DATE_TRUNC('month', order_date) :: DATE AS delivr_month,
@@ -29,7 +29,8 @@ GROUP BY delivr_month
 ORDER BY delivr_month ASC;  
 
 
--- Return a table of the registrations running total by month
+# Registrations running total
+  
 WITH reg_dates AS (
   SELECT
     user_id,
@@ -53,7 +54,10 @@ FROM regs
 ORDER BY delivr_month ASC;  
 
 
+
+# MAU Monitor (I)
 -- Return a table of MAUs and the previous month's MAU for every month
+
 WITH mau AS (
   SELECT
     DATE_TRUNC('month', order_date) :: DATE AS delivr_month,
@@ -73,7 +77,9 @@ FROM mau
 ORDER BY delivr_month ASC;  
 
 
--- Return a table of months and the deltas of each month's current and previous MAUS
+# MAU Monitor (II)
+-- Return a table of months and the deltas of each month's current and previous MAUS. If the delta is negative, less users were active in the current month than in the previous month, which triggers the monitor to raise a red flag so the Product team can investigate.
+  
 WITH mau AS (
   SELECT
     DATE_TRUNC('month', order_date) :: DATE AS delivr_month,
@@ -100,7 +106,9 @@ FROM mau_with_lag
 ORDER BY delivr_month ASC;  
 
 
--- Return a table of months and each month's MoM MAU growth rate to finalize the MAU monitor
+# MAU Monitor (III)
+-- Return a table of months and each month's MoM MAU growth rate to finalize the MAU monitor. With month-on-month (MoM) MAU growth rate over a raw delta of MAUs, the MAU monitor can have more complex triggers, like raising a yellow flag if the growth rate is -2% and a red flag if the growth rate is -5%.
+  
 WITH mau AS (
   SELECT
     DATE_TRUNC('month', order_date) :: DATE AS delivr_month,
@@ -128,7 +136,9 @@ FROM mau_with_lag
 ORDER BY delivr_month ASC;  
 
 
--- Return t able of MoM order growth rates
+# Order growth rate
+-- Return table of MoM order growth rates
+
 WITH orders AS (
   SELECT
     DATE_TRUNC('month', order_date) :: DATE AS delivr_month,
@@ -157,7 +167,9 @@ FROM orders_with_lag
 ORDER BY delivr_month ASC;  
 
 
--- Return MoM retention rates
+# Retention rate
+-- Return MoM retention rates to highlight high user loyalty
+  
 WITH user_monthly_activity AS (
   SELECT DISTINCT
     DATE_TRUNC('month', order_date) :: DATE AS delivr_month,
@@ -179,5 +191,3 @@ AND previous.delivr_month = (current.delivr_month - INTERVAL '1 month')
 GROUP BY previous.delivr_month
 ORDER BY previous.delivr_month ASC;  
 
-
--- 
