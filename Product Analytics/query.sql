@@ -1,7 +1,5 @@
 -- Calculating descriptive statistics for monthly revenue by product	  
 
-**Query**
-```sql
 WITH product_rev as (
 SELECT 
     ProductName,
@@ -22,14 +20,12 @@ SELECT
     stddev(monthly_rev) as std_dev_rev
 FROM product_rev
 GROUP BY ProductName;
-````
+
 
 
 
 -- Exploring Email Campaign variable distributions     
 
-**Query**
-```sql
 WITH email_link_clicks as (
     SELECT
         COUNT(EventID) as num_link_clicks,
@@ -44,14 +40,12 @@ SELECT
     COUNT(UserID) as num_users
 FROM email_link_clicks
 GROUP BY num_link_clicks;
-````
+
 
 
 
 -- Payment Funnel Analysis   
 
-**Query**
-```sql
 WITH max_status_reached AS (
 	SELECT
 		MAX(StatusID) AS maxstatus,
@@ -83,4 +77,4 @@ SELECT
 	COUNT(SubscriptionID) AS subscriptions
 FROM paymentfunnelstages
 GROUP BY paymentfunnelstage;
-````
+
