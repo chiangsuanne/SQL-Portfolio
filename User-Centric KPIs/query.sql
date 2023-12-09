@@ -56,7 +56,7 @@ ORDER BY delivr_month ASC;
 
 
 # MAU Monitor (I)
-/* Return a table of MAUs and the previous month's MAU for every month */
+-- Return a table of MAUs and the previous month's MAU for every month
 
 WITH mau AS (
   SELECT
@@ -78,7 +78,7 @@ ORDER BY delivr_month ASC;
 
 
 # MAU Monitor (II)
-/* Return a table of months and the deltas of each month's current and previous MAUS. If the delta is negative, less users were active in the current month than in the previous month, which triggers the monitor to raise a red flag so the Product team can investigate. */
+-- Return a table of months and the deltas of each month's current and previous MAUS. If the delta is negative, less users were active in the current month than in the previous month, which triggers the monitor to raise a red flag so the Product team can investigate.
   
 WITH mau AS (
   SELECT
@@ -107,7 +107,7 @@ ORDER BY delivr_month ASC;
 
 
 # MAU Monitor (III)
-/* Return a table of months and each month's MoM MAU growth rate to finalize the MAU monitor. With month-on-month (MoM) MAU growth rate over a raw delta of MAUs, the MAU monitor can have more complex triggers, like raising a yellow flag if the growth rate is -2% and a red flag if the growth rate is -5%. */
+-- Return a table of months and each month's MoM MAU growth rate to finalize the MAU monitor. With month-on-month (MoM) MAU growth rate over a raw delta of MAUs, the MAU monitor can have more complex triggers, like raising a yellow flag if the growth rate is -2% and a red flag if the growth rate is -5%.
   
 WITH mau AS (
   SELECT
@@ -137,7 +137,7 @@ ORDER BY delivr_month ASC;
 
 
 # Order growth rate
-/* Return table of MoM order growth rates */
+-- Return table of MoM order growth rates
 
 WITH orders AS (
   SELECT
@@ -168,7 +168,7 @@ ORDER BY delivr_month ASC;
 
 
 # Retention rate
-/* Return MoM retention rates to highlight high user loyalty */
+-- Return MoM retention rates to highlight high user loyalty
   
 WITH user_monthly_activity AS (
   SELECT DISTINCT
