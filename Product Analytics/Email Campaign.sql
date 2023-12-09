@@ -1,4 +1,4 @@
--- Exploring Email Campaign variable distributions     
+# Exploring Email Campaign variable distributions     
 
 WITH email_link_clicks as (
     SELECT
