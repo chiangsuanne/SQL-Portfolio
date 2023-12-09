@@ -1,4 +1,4 @@
--- Payment Funnel Analysis   
+# Payment Funnel Analysis   
 
 WITH max_status_reached AS (
 	SELECT
