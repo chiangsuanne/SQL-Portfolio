@@ -186,7 +186,7 @@ The summary statistics for the entire student population (both international and
 When specifically looking at international students, their average scores are slightly different, with average depression, social connectedness, and acculturative stress scores of 8.04, 37.42, and 75.56, respectively.
 
 Further analysis by grouping international students based on their length of stay reveals interesting insights:	
-- Students with a longer stay (e.g., 10 years) tend to have higher average scores in depression, social connectedness, and acculturative stress.	
+- Students with a longer stay tend to have higher average scores in depression, social connectedness, and acculturative stress.	
 - There's a variation in scores across different lengths of stay, suggesting that the duration of stay might be a contributing factor to mental health outcomes.	
 ### Suggestions for Further Analysis
 1. **Correlation Analysis:**	
