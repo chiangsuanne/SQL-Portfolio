@@ -59,7 +59,7 @@ SELECT inter_dom
 FROM students
 WHERE inter_dom = 'Inter';
 ````
-Output data (https://github.com/chiangsuanne/SQL-Portfolio/blob/main/Students'%20Mental%20Health%20Analysis/international%20student%20data.csv)
+View [Output data](https://github.com/chiangsuanne/SQL-Portfolio/blob/main/Students'%20Mental%20Health%20Analysis/international%20student%20data.csv)
 
 ```sql
 -- filter to understand data for domestic student type
@@ -75,7 +75,7 @@ SELECT inter_dom
 FROM students
 WHERE inter_dom = 'Dom';
 ````
-Output data (https://github.com/chiangsuanne/SQL-Portfolio/blob/main/Students'%20Mental%20Health%20Analysis/domestic%20student%20data.csv)
+View [Output data](https://github.com/chiangsuanne/SQL-Portfolio/blob/main/Students'%20Mental%20Health%20Analysis/domestic%20student%20data.csv)
 
 ```sql
 -- filter to understand data for null student type
@@ -91,7 +91,7 @@ SELECT inter_dom
 FROM students
 WHERE inter_dom IS NULL;
 ````
-Output data (https://github.com/chiangsuanne/SQL-Portfolio/blob/main/Students'%20Mental%20Health%20Analysis/null%20student%20data.csv)
+View [Output data](https://github.com/chiangsuanne/SQL-Portfolio/blob/main/Students'%20Mental%20Health%20Analysis/null%20student%20data.csv)
 
 ```sql
 -- query the summary statistics of the diagnostics scores for all students
