@@ -181,5 +181,25 @@ ORDER BY stay DESC;
 | 1    | 7.48        | 38.11       | 72.8       |
 
 ### Conclusion
+The summary statistics for the entire student population (both international and domestic) indicate that the average scores for depression (PHQ-9), social connectedness (SCS), and acculturative stress (ASISS) are 8.19, 37.47, and 72.38, respectively.
 
-### Suggestions for Further Improvement
+When specifically looking at international students, their average scores are slightly different, with average depression, social connectedness, and acculturative stress scores of 8.04, 37.42, and 75.56, respectively.
+
+Further analysis by grouping international students based on their length of stay reveals interesting insights:	
+- Students with a longer stay (e.g., 10 years) tend to have higher average scores in depression, social connectedness, and acculturative stress.	
+- There's a variation in scores across different lengths of stay, suggesting that the duration of stay might be a contributing factor to mental health outcomes.	
+### Suggestions for Further Analysis
+1. **Correlation Analysis:**	
+
+   Perform correlation analysis between the length of stay and diagnostic scores to determine if there is a statistically significant relationship.	
+2. **Statistical Tests:**	
+
+   Conduct statistical tests to assess the significance of differences in diagnostic scores among different length-of-stay groups.
+3. **Qualitative Analysis:**		
+
+   Consider qualitative data, such as student experiences or feedback, to provide additional context to the quantitative findings.	
+4. **Multivariate Analysis:**	
+
+   Explore multivariate analysis to understand the combined effect of different factors on mental health, considering language proficiency, academic level, and age alongside length of stay.
+
+By systematically conducting these further steps, you can gain a more comprehensive understanding of whether the length of stay is indeed a contributing factor to the mental health of international students at the Japanese university.
